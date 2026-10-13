@@ -2,13 +2,13 @@
 
 ## API configuration
 
-The frontend reads `VITE_CODESPACE_NAME` at build/start time to create the Codespaces API URL:
+Set `VITE_CODESPACE_NAME` in `octofit-tracker/frontend/.env.local` when running in Codespaces:
 
 ```dotenv
 VITE_CODESPACE_NAME=your-codespace-name
 ```
 
-Define it in `octofit-tracker/frontend/.env.local` when running in Codespaces. Restart the Vite dev server after changing the value. The API URL will be `https://<codespace-name>-8000.app.github.dev`.
+Restart the Vite dev server after changing the value. The API URL will be `https://<codespace-name>-8000.app.github.dev`. If the variable is unset, the app can infer the Codespace name from the forwarded port 5173 hostname; outside Codespaces it falls back to `http://localhost:8000`.
 
 When `VITE_CODESPACE_NAME` is unset, the frontend falls back to `http://localhost:8000`.
 
