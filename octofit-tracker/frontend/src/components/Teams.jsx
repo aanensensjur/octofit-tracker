@@ -5,6 +5,7 @@ function Teams() {
     <CollectionPage
       description="Meet the teams and their members."
       endpoint="/api/teams/"
+      request={fetch}
       title="Teams"
     />
   )

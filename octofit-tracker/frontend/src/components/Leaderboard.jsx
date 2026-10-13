@@ -5,6 +5,7 @@ function Leaderboard() {
     <CollectionPage
       description="See how members are progressing this week."
       endpoint="/api/leaderboard/"
+      request={fetch}
       title="Leaderboard"
     />
   )

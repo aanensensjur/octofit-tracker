@@ -5,6 +5,7 @@ type CollectionPageProps = {
   endpoint: string
   title: string
   description: string
+  request: typeof fetch
 }
 
 function displayValue(value: unknown): string {
@@ -30,7 +31,7 @@ function displayValue(value: unknown): string {
   return String(value)
 }
 
-function CollectionPage({ endpoint, title, description }: CollectionPageProps) {
+function CollectionPage({ endpoint, title, description, request }: CollectionPageProps) {
   const [records, setRecords] = useState<Record<string, unknown>[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -40,7 +41,7 @@ function CollectionPage({ endpoint, title, description }: CollectionPageProps) {
 
     async function loadCollection() {
       try {
-        const response = await fetch(apiUrl(endpoint), { signal: controller.signal })
+        const response = await request(apiUrl(endpoint), { signal: controller.signal })
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`)
         }
@@ -64,7 +65,7 @@ function CollectionPage({ endpoint, title, description }: CollectionPageProps) {
 
     void loadCollection()
     return () => controller.abort()
-  }, [endpoint])
+  }, [endpoint, request])
 
   const columns = [...new Set(records.flatMap((record) => Object.keys(record)))].filter(
     (column) => !['_id', '__v', 'createdAt', 'updatedAt'].includes(column),

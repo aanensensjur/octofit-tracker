@@ -5,6 +5,7 @@ function Users() {
     <CollectionPage
       description="Browse OctoFit Tracker member profiles."
       endpoint="/api/users/"
+      request={fetch}
       title="Users"
     />
   )
